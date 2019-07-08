@@ -224,7 +224,8 @@ class Generator(nn.Module):
 
         self.G_linear = SpectralNorm(nn.Linear(20, 4 * 4 * 16 * chn))
 
-        self.conv = nn.ModuleList([GBlock(16*chn, 16*chn, n_class=n_class),
+        self.conv = nn.ModuleList([
+                                #GBlock(16*chn, 16*chn, n_class=n_class),
                                 GBlock(16*chn, 8*chn, n_class=n_class),
                                 GBlock(8*chn, 4*chn, n_class=n_class),
                                 GBlock(4*chn, 2*chn, n_class=n_class),
@@ -289,8 +290,9 @@ class Discriminator(nn.Module):
                                   conv(1*chn, 2*chn, downsample=True),    
                                   conv(2*chn, 4*chn, downsample=True),
                                   conv(4*chn, 8*chn, downsample=True),
-                                  conv(8*chn, 16*chn, downsample=True),
-                                  conv(16*chn, 16*chn, downsample=False))
+                                  conv(8*chn, 16*chn, downsample=True)
+                                  #,conv(16*chn, 16*chn, downsample=False)
+                                  )
 
         self.linear = SpectralNorm(nn.Linear(16*chn, 1))
 
